@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Segmentify</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="node_modules/@glidejs/glide/dist/css/glide.core.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<!-- Optional Theme stylesheet -->
+    <link rel="stylesheet" href="node_modules/@glidejs/glide/dist/css/glide.theme.min.css">
+    <script src="node_modules/@glidejs/glide/dist/glide.min.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/swiper/css/swiper.css">
+    <link rel="stylesheet" href="https://unpkg.com/swiper/css/swiper.min.css">
+
+
+</head>
+<body>
+<template id="placeholderCardNew">
+    <style>
+        .header{
+            margin-right: auto;margin-left: auto; display: block;position: relative;
+        }
+        .categories{
+            margin-right: auto;height:20%;margin-left: auto; display: block;position: relative;
+        }
+        .ticket{
+            height:60px;width: 20%;position: absolute;top:10px;left: 3px;
+        }
+        .price{
+            bottom:40px;left:0;right:0;text-align: center;position: absolute;
+        }
+        .details{
+            bottom: 5px;left:0;right:0;position: absolute;
+        }
+        .discount{
+            height:20px;background-color: darkred;
+        }
+        .discountP{
+            color: white;
+        }
+        .like{
+            bottom: 0;position: absolute;
+        }
+        i{
+            height: 20px;color: red;display: inline;
+        }
+        .likeP{
+            display: inline;
+        }
+        .oldPrice{
+            font-size:15px;font-weight: bold;color: grey;
+        }
+
+    </style>
+    <div class="card">
+        <slot name='image_src'></slot>
+        <div class="header">
+            <p style="font-size:16px;font-weight: bold;text-align: center;"><slot name='card_header'></slot></p>
+        </div>
+        <div class="categories" >
+            <p style="font-size:13px;color:gray;text-align: center;"><slot name='card_categories'></slot></p>
+        </div>
+        <div class="ticket">
+            <slot name='discount'></slot>
+            <slot name='like'></slot>
+        </div>
+        <div class="price">
+            <p style="font-size:15px;font-weight: bold;display: inline;"><slot name='new_price'></slot></p>
+            <slot name='old_price'></slot>
+        </div>
+        <div class="details" >
+            <p style="font-size:12px;color:gray;text-align: center;"><slot name='base_price'></slot></p>
+        </div>
+
+    </div>
+
+
+</template>
+<template id="placeholderCard">
+
+    <div class="card" style="display: none;">
+        <img style="width: 40%;height:40%;margin-left:auto;margin-right:auto;display: block;margin-top:10px; " src="image_src" alt="">
+        <div class="header" style="margin-right: auto;margin-left: auto; display: block;position: relative;">
+            <p style="font-size:16px;font-weight: bold;text-align: center;">card_header</p>
+        </div>
+        <div class="categories" style="margin-right: auto;height:20%;margin-left: auto; display: block;position: relative; ">
+            <p style="font-size:13px;color:gray;text-align: center;">card_categories</p>
+        </div>
+        <div class="ticket" style="height:60px;width: 20%;position: absolute;top:10px;left: 3px;">
+            <div class="discount" style="height:20px;background-color: darkred;display:discountdisplay">
+                <p class="disCountP" style="color: white;">persentage</p>
+            </div>
+            <div class="like" style="bottom: 0;position: absolute;display: likecountdisplay">
+                <i class="fa fa-heart" style="height: 20px;color: red;display: inline;"></i>
+                <p style="display: inline;">like_count</p>
+            </div>
+        </div>
+        <div class="price" style="bottom:40px;left:0;right:0;text-align: center;position: absolute;">
+            <p style="font-size:15px;font-weight: bold;display: inline;">new_price</p>
+            <strike style="font-size:15px;font-weight: bold;color: grey;display: oldpricedisplay">old_price</strike>
+        </div>
+        <div class="details" style="bottom: 5px;left:0;right:0;position: absolute; ">
+            <p style="font-size:12px;color:gray;text-align: center;">base_price</p>
+        </div>
+
+    </div>
+
+
+</template>
+
+
+
+
+
+
+
+<div id="slider0" class="glide1" style="width:100%;height:50%;margin-left: auto;margin-right: auto;display: block;">
+  <div data-glide-el="track" class="glide__track">
+    <ul id="slideList0" class="glide__slides">
+
+    </ul>
+  </div>
+</div>
+<div id="slider1" class="glide2" style="width:100%;height:50%;margin-left: auto;margin-right: auto;display: block;">
+  <div data-glide-el="track" class="glide__track">
+    <ul  id="slideList1" class="glide__slides">
+
+    </ul>
+  </div>
+
+</div>
+<div id="slider2" class="glide3" style="width:100%;height:50%;margin-left: auto;margin-right: auto;display: block;">
+  <div data-glide-el="track" class="glide__track">
+    <ul  id="slideList2" class="glide__slides">
+
+    </ul>
+  </div>
+
+</div>
+<div class="swiper-container" style="width:100%;margin-right: auto;margin-left: auto;display: block;">
+    <div id="swiper" class="swiper-wrapper">
+
+    </div>
+
+
+    <div class="swiper-button-prev"></div>
+    <div class="swiper-button-next"></div>
+
+
+</div>
+<script src="https://unpkg.com/swiper/js/swiper.js"></script>
+<script src="https://unpkg.com/swiper/js/swiper.min.js"></script>
+<script src="sample_products.js"></script>
+<script src="card.js"></script>
+<script>
+
+    //for last slider I use object orianted style with template and slot some elements can be bad style I just tried :)
+    function Discount(value) {
+        this.element=null;
+        this.value=value;
+        this.createComponent=function () {
+            let div=document.createElement('div');
+            let p=document.createElement('p');
+            p.setAttribute('class','discountP');
+            p.style.cssText="color: white;";
+            div.style.cssText="height:20px;background-color: darkred;";
+            p.innerText=this.value+'%';
+            div.setAttribute('class','discount');
+            div.setAttribute('slot','discount');
+            div.appendChild(p);
+            this.element=div;
+
+        };
+        this.createComponent();
+
+    }
+    function Image(value) {
+        this.element=null;
+        this.value=value;
+        this.createComponent=function () {
+            let img=document.createElement('img');
+            img.setAttribute('src',this.value);
+            img.setAttribute('slot','image_src');
+            img.style.cssText="width: 40%;height:140px;margin-left:auto;margin-right:auto;display: block;margin-top:10px;";
+            this.element=img;
+
+        };
+        this.createComponent();
+
+    }
+
+    function OldPrice(value) {
+        this.element=null;
+        this.value=value;
+        this.createComponent=function () {
+            let strike=document.createElement('strike');
+            strike.innerText=this.value;
+            strike.setAttribute('class','oldPrice');
+            strike.setAttribute('slot','oldPrice');
+            strike.style.cssText="font-size:15px;font-weight: bold;color: grey;display: inline;";
+            this.element=strike;
+
+        };
+        this.createComponent();
+
+    }
+    function LikeCount(value) {
+        this.element=null;
+        this.value=value;
+        this.createComponent=function () {
+            let div=document.createElement('div');
+            let i=document.createElement('i');
+            let p=document.createElement('p');
+            p.setAttribute('class','likeP');
+            div.style.cssText="bottom: 0;position: absolute;";
+            p.innerText=this.value;
+            p.style.cssText="display: inline;";
+            i.setAttribute('class','fa fa-heart');
+            i.style.cssText="height: 20px;color: red;display: inline;";
+            div.appendChild(i);
+            div.appendChild(p);
+            div.setAttribute('class','like');
+            div.setAttribute('slot','like');
+            this.element=div;
+
+        };
+        this.createComponent();
+
+    }
+    function CardDiv(id) {
+        this.element = null;
+        this.id = id;
+        this.createCard = function () {
+            let div = document.createElement('div');
+            div.setAttribute('class', 'card');
+            div.setAttribute('id', 'card' + this.id.toString());
+            this.element = div;
+        };
+        this.appendComponent = function (comp) {
+            this.element.appendChild(comp.element);
+        };
+        this.appendToBody = function (id) {
+            let div = document.createElement('div');
+            div.setAttribute('class', 'swiper-slide');
+            div.appendChild(this.element);
+            document.getElementById('swiper').appendChild(div);
+        };
+        this.appendSlut = function (name, slutval) {
+            let span = document.createElement('span');
+            span.setAttribute('slot', name);
+            span.innerText = slutval;
+            this.element.appendChild(span);
+        };
+        this.createCard();
+    }
+    var products=productInfo.products;
+    for(let i=0;i<10;i++){
+
+        var exampleProduct=products[i];
+        var cardDiv=new CardDiv(i);
+        var diff=((exampleProduct.price-exampleProduct.oldPrice)/exampleProduct.oldPrice)*100;
+        var img=new Image(exampleProduct.image);
+        cardDiv.appendComponent(img);
+        var header=exampleProduct.name;
+        var categories=exampleProduct.categories;
+        var price=exampleProduct.priceText;
+        var basePrice=exampleProduct.params.basePrice;
+        var likeCount=exampleProduct.params.likeCount;
+        if (diff){
+            let oldPrice=new OldPrice(exampleProduct.oldPrice);
+            let discount=new Discount(parseInt(diff).toString());
+            cardDiv.appendComponent(oldPrice);
+            cardDiv.appendComponent(discount);
+        }
+        if(likeCount.length>0){
+            let likeCountComp=new LikeCount(likeCount);
+            cardDiv.appendComponent(likeCountComp);
+        }
+
+        cardDiv.appendSlut('card_categories',categories.join(' | '));
+        cardDiv.appendSlut('card_header',header);
+        cardDiv.appendSlut('new_price',price);
+        cardDiv.appendSlut('base_price',basePrice);
+        if (i<10){
+            cardDiv.appendToBody(-1);
+        }
+        let template=document.getElementById('placeholderCardNew').content;
+        cardDiv.element.attachShadow({mode:'closed'}).appendChild(template.cloneNode(true));
+    }
+
+    //html text style I filled sliders with html code in this example
+    document.onreadystatechange = () => {
+        if (document.readyState === 'complete'){
+            for(let i=0;i<products.length;i++){
+                var cardHtml="<li class='glide__slide'>"+document.getElementById("placeholderCard").innerHTML+"</li>";
+                var product=products[i];
+                var diff=((product.price-product.oldPrice)/product.oldPrice)*100;
+                cardHtml=cardHtml.replace('card_header',product.name);
+                cardHtml=cardHtml.replace('image_src',product.image);
+                cardHtml=cardHtml.replace('card_categories',product.categories.join(' | '));
+                cardHtml=cardHtml.replace('new_price',product.priceText);
+                cardHtml=cardHtml.replace('base_price',product.params.basePrice);
+                cardHtml=cardHtml.replace('none','block');
+                if (diff){
+                    cardHtml=cardHtml.replace('old_price',product.oldPrice)
+                        .replace('oldpricedisplay','inline');
+                    cardHtml=cardHtml.replace('persentage',parseInt(diff).toString()+'%'.replace('discountdisplay','block'));
+                }else{
+                    cardHtml=cardHtml
+                        .replace('oldpricedisplay','none');
+                    cardHtml=cardHtml.replace('discountdisplay','none');
+                }
+                if(product.params.likeCount.length>0){
+                    cardHtml=cardHtml.replace('like_count',product.params.likeCount)
+                        .replace('likecountdisplay','block');
+                }else{
+                    cardHtml=cardHtml
+                        .replace('likecountdisplay','none');
+                }
+                var slider;
+                if (i<10){
+                    slider=document.getElementById('slideList0');
+                }else if(10<=i && i<20){
+                    slider=document.getElementById('slideList1');
+                }else{
+                    slider=document.getElementById('slideList2');
+                }
+
+                slider.insertAdjacentHTML('afterbegin',cardHtml)
+
+            }
+            var glide1 = new Glide('.glide1', {
+              type: 'carousel',
+              perView: 5,
+              focusAt: 'center',
+              breakpoints: {
+                800: {
+                  perView: 1
+                },
+                480: {
+                  perView: 1
+                }
+              }
+            });
+            glide1.mount();
+            var glide2 = new Glide('.glide2', {
+              type: 'carousel',
+              perView: 5,
+              focusAt: 'center',
+              breakpoints: {
+                800: {
+                  perView: 1
+                },
+                480: {
+                  perView: 1
+                }
+              }
+            });
+            glide2.mount();
+            var glide3 = new Glide('.glide3', {
+              type: 'carousel',
+              perView: 5,
+              focusAt: 'center',
+              breakpoints: {
+                800: {
+                  perView: 1
+                },
+                480: {
+                  perView: 1
+                }
+              }
+            });
+            glide3.mount();
+            var mySwiper = new Swiper ('.swiper-container', {
+
+                direction: 'horizontal',
+                loop: true,
+                slidesPerView:1,
+
+
+                pagination: {
+                  el: '.swiper-pagination',
+                },
+
+
+                navigation: {
+                  nextEl: '.swiper-button-next',
+                  prevEl: '.swiper-button-prev',
+                },
+            })
+
+
+
+
+        }
+    };
+
+
+
+</script>
+
+
+</body>
+
+<script src="bundle.js"></script>
+
+</html>
